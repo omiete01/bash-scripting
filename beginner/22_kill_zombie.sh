@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# not complete yet!
+
 # this script finds and kills all zombie processes
 
 # find the zombie process
