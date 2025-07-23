@@ -9,7 +9,8 @@
 # readarray -t zombie_process <<< "$(ps -eAo state,pid,comm | grep -w Z)"
 zombie_process=( $(ps -eAo state,pid,comm | grep -w Z))
 # echo ${zombie_process[@]}
-kill -9 | grep "PID"
+# kill -9 | grep "PID"
+killall zombie
 
 # for zombie in ${zombie_process[@]}; do
 #     echo "${zombie[0]}"
