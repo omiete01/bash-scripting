@@ -1,0 +1,11 @@
+apple 
+banana
+bangkok
+apple
+tokyo
+mountain
+apple
+tokyo
+date
+mountain
+banana
