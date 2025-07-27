@@ -5,6 +5,7 @@
 # this script takes a text file as an argument
 if [[ $# != 1 ]]; then
     echo "This script takes an argument."
+    exit 1
 fi
 
 
