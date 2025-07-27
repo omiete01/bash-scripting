@@ -8,8 +8,16 @@ if [[ $# != 1 ]]; then
     exit 1
 fi
 
+if [[ -e $1 ]]; then
+    echo "'$1' does not exist"
+    exit 1
+fi
 
-for user in "$1"; do
+users=$1
+
+# while IFS= read -r user; do
+for user in $(cat "$users"); do
+    groupadd $user
     useradd -m -G $user $user
     passwd $user $user123
     user_home=/home/$user
