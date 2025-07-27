@@ -10,27 +10,27 @@ fi
 
 users=$1
 
-# while IFS= read -r user; do
+# looping through each name in the text file
 for user in $(cat "$users"); do
+
+    # creates a group for the user
     groupadd $user
+
+    # creates the user account and adds it to their group
     useradd -m -g $user $user
-    if [[ $? -eq 0 ]]; then
-    # passwd $user $user123
-    # user_home=/home/$user
-        ssh_dir=/home/$user/.ssh
-        auth_key=/home/$user/.ssh/authorized_keys
 
-        # mkdir $user_home
-        # chmod 700 $user_home
+    ssh_dir=/home/$user/.ssh
+    auth_key=/home/$user/.ssh/authorized_keys
 
-        mkdir $ssh_dir
-        chmod 700 $ssh_dir
-        touch $auth_key
-        chmod 600 $auth_key
-        chown -R $user:$user /home/$user
-    else
-        echo "Something went wrong."
-        exit 1
+    # create an ssh directory for the user with permissions
+    mkdir $ssh_dir
+    chmod 700 $ssh_dir
 
-    fi
+    # creates authorized_keys file for user with permissions
+    touch $auth_key
+    chmod 600 $auth_key
+
+    # giving user full ownership of their home directory
+    chown -R $user:$user /home/$user
+    
 done
