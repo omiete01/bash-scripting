@@ -8,29 +8,29 @@ if [[ $# != 1 ]]; then
     exit 1
 fi
 
-if [[ -e $1 ]]; then
-    echo "'$1' does not exist"
-    exit 1
-fi
-
 users=$1
 
 # while IFS= read -r user; do
-for user in $(cat "$users"); do
-    groupadd $user
-    useradd -m -G $user $user
-    passwd $user $user123
-    user_home=/home/$user
+# for user in $(cat "$users"); do
+groupadd $user
+useradd -m -g $user $user
+if [[ $? -eq 0 ]]; then
+# passwd $user $user123
+# user_home=/home/$user
     ssh_dir=/home/$user/.ssh
     auth_key=/home/$user/.ssh/authorized_keys
-    
-    mkdir $user_home
-    chmod 700 $user_home
-    chown $user:$user /home/$user
+
+    # mkdir $user_home
+    # chmod 700 $user_home
 
     mkdir $ssh_dir
     chmod 700 $ssh_dir
-    mkdir $auth_key
+    touch $auth_key
     chmod 600 $auth_key
+    chown -R $user:$user /home/$user
+else
+    echo "Something went wrong."
+    exit 1
 
-done
+fi
+# done
